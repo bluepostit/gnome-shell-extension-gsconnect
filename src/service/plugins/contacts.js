@@ -146,12 +146,15 @@ var Plugin = GObject.registerClass({
     /**
      * Decode a string encoded as "QUOTED-PRINTABLE" and return a regular string
      *
-     * See: https://github.com/mathiasbynens/quoted-printable/blob/master/src/quoted-printable.js
-     *
      * @param {string} input - The QUOTED-PRINTABLE string
      * @return {string} The decoded string
      */
     _decodeQuotedPrintable(input) {
+        /* SPDX-SnippetBegin
+         * SPDX-License-Identifier: MIT
+         * SPDX-SnippetCopyrightText: Mathias Bynens
+         * SPDX-SnippetComment: https://github.com/mathiasbynens/quoted-printable/blob/master/src/quoted-printable.js
+         */
         return input
             // https://tools.ietf.org/html/rfc2045#section-6.7, rule 3
             .replace(/[\t\x20]$/gm, '')
@@ -162,18 +165,22 @@ var Plugin = GObject.registerClass({
                 const codePoint = parseInt($1, 16);
                 return String.fromCharCode(codePoint);
             });
+        /* SPDX-SnippetEnd */
     }
 
     /**
      * Decode a string encoded as "UTF-8" and return a regular string
-     *
-     * See: https://github.com/kvz/locutus/blob/master/src/php/xml/utf8_decode.js
      *
      * @param {string} input - The UTF-8 string
      * @return {string} The decoded string
      */
     _decodeUTF8(input) {
         try {
+            /* SPDX-SnippetBegin
+             * SPDX-License-Identifier: MIT
+             * SPDX-SnippetCopyrightText: Kevin van Zonneveld
+             * SPDX-SnippetComment: https://github.com/kvz/locutus/blob/master/src/php/xml/utf8_decode.js
+             */
             const output = [];
             let i = 0;
             let c1 = 0;
@@ -212,6 +219,7 @@ var Plugin = GObject.registerClass({
             }
 
             return output.join('');
+            /* SPDX-SnippetEnd */
 
         // Fallback to old unfaithful
         } catch (e) {
